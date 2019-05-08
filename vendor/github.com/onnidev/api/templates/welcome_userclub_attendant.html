@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <center style="-webkit-font-smoothing: antialiased;">
+      <!-- Texto que aparece antes da abertura do email -->
+      <p style="display: none;">ONNi | Você foi cadastrado pelo club {{.ClubName}} para usar o aplicativo Staff ONNi. Siga os passos abaixo para começar a usar o aplicativo.</p>
+      <table style="font-family: Helvetica, Arial, sans-serif; max-width: 600px; width: 100%; background-color: #16171B; color: #FFF;" cellspacing="0px" cellpadding="0px">
+        <tr style="margin-bottom: 30px; display: block; padding: 52px 52px 0 52px;">
+          <td>
+            <img style="width: 44px; height: 32px;" src="https://cdn.onni.live/www/img/mail/logo-white.png" />
+          </td>
+        </tr>
+        <tr style="margin-bottom: 30px; display: block; padding: 0 52px;">
+          <td style="display: block;">
+            <font style="
+              height: auto;
+              width: 100%;
+              color: #FFFFFF;
+              font-size: 26px;
+              font-weight: 600;
+              line-height: 1.2;
+              padding-bottom: 40px;
+              display: block;
+            ">Olá {{.UserClubName}}</font>
+            <p style="
+              color: #B9B9BB;
+              font-family: Helvetica;
+              font-size: 16px;
+              line-height: 1.4;
+              margin: 0 auto 20px;
+              font-weight:  100;
+            ">Você foi cadastrado pelo club {{.ClubName}} para usar o aplicativo Staff ONNi. Siga os passos abaixo para começar a usar o aplicativo.</p>
+          </td>
+        </tr>
+        <tr style="background: #1f2327; margin-bottom: 30px; display: block; padding: 0 52px;">
+          <td>
+
+            <div style="margin: 0 auto;max-width: 600px;padding: 40px 0px 0px; border: 0;display: block;">
+              <h2 style="color: #fff; font-weight: normal; font-family: Helvetica;font-size: 18px;line-height: 24px;margin: 0 auto;font-weight: 500; max-width: 600px; margin-bottom: 8px">
+      					1) Instale o Aplicativo
+      				</h2>
+              <span style="display: block; margin-bottom: 10px;color: #FFF; text-decoration: none; font-size: 14px; font-weight: lighter;">Faça o download de acordo com seu dispositivo clicando nos links abaixo:</span>
+              <a style="text-decoration: none;" href="https://itunes.apple.com/br/app/onni-leitor/id1178073418?mt=8">
+                <img title="AppStore" alt="AppStore" src="https://us.surfair.com/app/app/imgs/appstore.png" style="width:144px;" class="downloadapp-02">
+              </a>
+               &nbsp;&nbsp;
+              <a style="text-decoration: none;" href="https://play.google.com/store/apps/details?id=br.com.onni.appclub">
+                <img title="GooglePlay" alt="GooglePlay" src="https://storage.googleapis.com/support-kms-prod/D90D94331E54D2005CC8CEE352FF98ECF639"  style="width:150px;">
+              </a>
+        		</div>
+
+            <div style="margin: 0 auto;max-width: 600px;padding: 20px 0px 0px; border: 0;display: block;">
+              <h2 style="color: #fff; font-weight: normal; font-family: Helvetica;font-size: 18px;line-height: 24px;margin: 0 auto;font-weight: 500; max-width: 600px; margin-bottom: 8px">
+      					2) Acesse sua conta
+      				</h2>
+              <span style="display: block; margin-bottom: 10px; color: #FFF; text-decoration: none; font-size: 14px; font-weight: lighter;">
+                O login no ONNi Leitor deve ser feito usando seu usuário e senha:
+              </span>
+              <span style="color: #FFF; text-decoration: none; font-size: 14px; font-weight: lighter;">
+                Usuário: {{.Mail}}<br />
+                Senha: {{.Password}}
+              </span>
+            </div>
+
+            <div style="margin: 0 auto;max-width: 600px;padding: 20px 0px 0px; border: 0;display: block;">
+              <h2 style="color: #fff; font-weight: normal; font-family: Helvetica;font-size: 18px;line-height: 24px;margin: 0 auto;font-weight: 500; max-width: 600px; margin-bottom: 8px">
+      					3) Comece a ler vouchers
+      				</h2>
+              <span style="display: block; margin-bottom: 10px; color: #FFF; text-decoration: none; font-size: 14px; font-weight: lighter;">
+                Durante o evento, você vai usar o ONNi Leitor para ler os vouchers dos clientes.
+                <ul style="padding-left: 30px; margin: 20px 0 0;">
+                  <li>Clique em Ler Voucher.</li>
+                  <li>A câmera vai abrir.</li>
+                  <li>Aponte a câmera para o QRCode do usuário.</li>
+                  <li>O app vai mostrar o nome do produto.</li>
+                  <li>Clique no botão para confirmar que o produto foi entregue.</li>
+                  <li>Pronto!</li>
+                </ul>
+              </span>
+            </div>
+
+            <div style="margin: 0 auto;max-width: 600px;padding: 20px 0px 40px; border: 0;display: block;">
+              <h2 style="color: #fff; font-weight: normal; font-family: Helvetica;font-size: 18px;line-height: 24px;margin: 0 auto;font-weight: 500; max-width: 600px; margin-bottom: 8px">
+      					4) Mande seu feedback
+      				</h2>
+              <span style="display: block; margin-bottom: 10px; color: #FFF; text-decoration: none; font-size: 14px; font-weight: lighter;">
+                Queremos que o App ONNi seja sua forma preferida para atender nos eventos!
+Para podermos continuar melhorando sempre, mande seu feedback pra nós. Conte como foi a experiência de usar o aplicativo e como podemos melhorar. Mande um email para <a style="color: #FFF; text-decoration: none;" href="mailto:hello@onni.live?Subject=ONNi Leitor - Feedback">hello@onni.live</a>.
+              </span>
+            </div>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <center>
+              <table style="padding: 52px 0; margin: 0 auto;" cellpadding="0px" cellspacing="0px">
+                <tr>
+                  <td>
+                    <a style="padding: 25px" href="https://www.facebook.com/onni.live/">
+                      <img alt="ícone do facebook" src="https://cdn.onni.live/www/img/mail/ic-facebook.png"
+                      srcset="https://cdn.onni.live/www/img/mail/ic-facebook@2x.png 2x,
+                              https://cdn.onni.live/www/img/mail/ic-facebook@3x.png 3x"
+                      class="ic-facebook"></a>
+                  </td>
+                  <td>
+                    <a style="padding: 25px" href="https://www.instagram.com/onni.live/"><img alt="ícone do instagram" src="https://cdn.onni.live/www/img/mail/ic-instagram.png"
+                      srcset="https://cdn.onni.live/www/img/mail/ic-instagram@2x.png 2x,
+                              https://cdn.onni.live/www/img/mail/ic-instagram@3x.png 3x"
+                      class="ic-instagram"></a>
+                  </td>
+                  <td>
+                    <a style="padding: 25px" href="https://open.spotify.com/user/onni.live">
+                      <img alt="ícone do spotify" src="https://cdn.onni.live/www/img/mail/ic-spotify.png"
+                      srcset="https://cdn.onni.live/www/img/mail/ic-spotify@2x.png 2x,
+                              https://cdn.onni.live/www/img/mail/ic-spotify@3x.png 3x"
+                      class="ic-spotify">
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <p style="color: #828284;opacity: 0.7;font-family: Helvetica;font-size: 12px;text-align: center;font-weight:  lighter;max-width: 456px;margin: 0 auto;padding: 0 20px 40px;">
+        			Este é um e-mail automático, por favor não responda.
+        			</p>
+            </center>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+</html>

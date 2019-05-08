@@ -1,0 +1,109 @@
+version: 2
+jobs:
+  scheduler:
+    docker: [{image: 'onnidev/circle'}]
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: |
+         gopath.sh /go/src/github.com/onnidev/api
+         cat /go/src/github.com/onnidev/api/main.go
+         docker login -u $DOCKER_USER --password $DOCKER_PASS
+         docker pull onnidev/api
+         export id=$(docker run -d onnidev/api)
+         docker cp $id:/main ./main
+         ls ./
+         pwd
+         dobi --no-bind-mount scheduler;
+         docker push onnidev/scheduler;
+         kubectl get pods --kubeconfig=kube.json
+         kubectl delete -f scheduler_deploy.yml --kubeconfig=kube.json
+         kubectl create -f scheduler_deploy.yml --kubeconfig=kube.json
+         kubectl get pods --kubeconfig=kube.json
+  production:
+    docker: [{image: 'onnidev/circle'}]
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: |
+         docker run -d --net=host --name=mongo onnidev/mongonni
+         gopath.sh /go/src/github.com/onnidev/api
+         cat /go/src/github.com/onnidev/api/main.go
+         docker login -u $DOCKER_USER --password $DOCKER_PASS
+         dobi --no-bind-mount production;
+         docker push onnidev/api;
+  canary:
+    docker: [{image: 'onnidev/circle'}]
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: |
+         docker run -d --net=host --name=mongo onnidev/mongonni
+         gopath.sh /go/src/github.com/onnidev/api
+         cat /go/src/github.com/onnidev/api/main.go
+         cat /go/src/github.com/onnidev/api/cmd/root.go
+         docker login -u $DOCKER_USER --password $DOCKER_PASS
+         dobi --no-bind-mount canary;
+         docker push onnidev/canary;
+  deployApi:
+    docker: [{image: 'onnidev/circle'}]
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: |
+         docker login -u $DOCKER_USER --password $DOCKER_PASS
+         gopath.sh /go/src/github.com/onnidev/api
+         kubectl get pods --kubeconfig=kube.json
+         kubectl delete -f api_deploy.yml --kubeconfig=kube.json
+         kubectl create -f api_deploy.yml --kubeconfig=kube.json
+         kubectl get pods --kubeconfig=kube.json
+  childrenImages:
+    docker: [{image: 'onnidev/circle'}]
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: |
+         gopath.sh /go/src/github.com/onnidev/api
+         docker login -u $DOCKER_USER --password $DOCKER_PASS
+         dobi --no-bind-mount loop;
+         dobi --no-bind-mount oplog;
+         docker push onnidev/loop;
+         docker push onnidev/oplog;
+  deployCanary:
+    docker: [{image: 'onnidev/circle'}]
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: |
+         docker login -u $DOCKER_USER --password $DOCKER_PASS
+         gopath.sh /go/src/github.com/onnidev/api
+         kubectl get pods --kubeconfig=kube.json
+         kubectl delete -f canary_deploy.yml --kubeconfig=kube.json
+         kubectl create -f canary_deploy.yml --kubeconfig=kube.json
+         kubectl get pods --kubeconfig=kube.json
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - production:
+          filters:
+            branches:
+              only:
+                - master
+      - deployApi:
+          requires:
+            - production
+      - scheduler:
+          requires:
+            - deployApi
+      - canary:
+          filters:
+            branches:
+              only:
+                - develop
+      - childrenImages:
+          requires:
+            - canary
+      - deployCanary:
+          requires:
+            - childrenImages

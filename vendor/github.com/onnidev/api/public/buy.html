@@ -1,0 +1,176 @@
+<html lang="en" dir="ltr"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+    <center>
+        <!-- Texto que aparece antes da abertura do email -->
+        <p style="display: none;">Sua compra de R${{.Total}} foi processada.</p>
+        <table style="font-family: Helvetica, Arial, sans-serif; max-width: 600px; width: 100%; background-color: #16171B; color: #FFF;" cellspacing="0px" cellpadding="0px">
+            <tbody><tr style="margin-bottom: 30px; display: block; padding: 52px 52px 0 52px;">
+                <td>
+                    <img style="width: 44px; height: 32px;" src="https://cdn.onni.live/www/img/mail/logo-white.png">
+                </td>
+            </tr>
+            <tr style="margin-bottom: 30px; display: block; padding: 0 52px;">
+                <td style="display: block;">
+                    <font style="
+                      height: auto;
+                      width: 100%;
+                      color: #FFFFFF;
+                      font-size: 26px;
+                      font-weight: 600;
+                      line-height: 1.2;
+                      padding-bottom: 30px;
+                      display: block;
+                      ">
+                        Obrigado por sua compra!
+                    </font>
+                    <font style="
+                      height: auto;
+                      width: 100%;
+                      color: #b0b0b2;
+                      font-size: 14px;
+                      display: block;
+                      font-weight: lighter;
+                      margin-bottom: 30px;
+                      ">Recebemos o pagamento da sua compra e este é o seu recibo. Abaixo está um resumo do que você comprou.</font>
+                    <font style="
+                      height: auto;
+                      width: 100%;
+                      color: #b0b0b2;
+                      font-size: 14px;
+                      display: block;
+                      font-weight: lighter;
+                      margin-bottom: 40px;
+                      ">Este recibo não é valido para retirada de produtos, para acessar seus vouchers utilize o aplicativo.</font>
+                </td>
+            </tr>
+            <tr style="display: block; padding: 52px 52px 0 52px; background: #1F2227;">
+                <td>
+                    <table cellpadding="0px" cellspacing="0px" style="display: block; margin-bottom: 30px; background: #1F2227;">
+                        <tbody><tr>
+                            <td>
+                                <span style="border-radius: 30px; overflow: hidden; height: 48px; width: 48px; margin-right: 16px; float: left; background: #FFF;">
+                                    <img style="width: 100%;" src="{{.URL}}">
+                                </span>
+                            </td>
+                            <td style="display: block;">
+                                <font style="
+                                  height: auto;
+                                  width: 100%;
+                                  color: #FFF;
+                                  font-size: 16px;
+                                  display: block;
+                                  margin: 5px 0;
+                                  ">{{.PartyName}}</font>
+                                <font style="
+                                  height: auto;
+                                  width: 100%;
+                                  color: #b0b0b2;
+                                  font-size: 16px;
+                                  display: block;
+                                  ">{{.PartyStartDate}}</font>
+                            </td>
+                        </tr>
+                        </tbody></table>
+                </td>
+            </tr>
+            <tr style="display: block; padding: 0 52px; background: #1F2227;">
+                <td align="center" valign="top" width="100%" style="display: block; padding-top: 20px; background-color: #1f2227; width: 100%;">
+                    <center>
+
+                        <!-- Produtos -->
+                        <table cellspacing="0" cellpadding="0" style="width: 100%;">
+                            <tbody style="width: 100%;">
+                                {{range $val := .Cart}}
+                                <tr style="width: 100%;">
+                                    <td style="text-align: left;">
+                                        <p style="margin: 0;">{{$val.Name}}</p>
+                                        <small style="color: #b0b0b2;">Quantidade: {{$val.Quantity}}</small>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <b style="width: 100%; text-align: right;">R$ {{$val.Price}}</b>
+                                    </td>
+                                </tr>
+                                {{end}}
+                            </tbody>
+                        </table>
+
+                    </center>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center" style="background-color:#1f2227;">
+                    <center>
+                        <table cellspacing="0" cellpadding="0" style="width: 100%; max-width: 600px; padding:20px 52px;">
+                            <tbody><tr>
+                                <td>
+                                    <span style="
+                                      display: block;
+                                      background-color: #2d2f35;
+                                      width: 100%;
+                                      height: 1px;
+                                      margin-bottom: 40px;
+                                      max-width: 600px;
+                                      margin: 20px auto;
+                                      "></span>
+                                </td>
+                            </tr>
+                            </tbody></table>
+                    </center>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center" valign="top" width="100%" class="content-padding" style="padding:0 52px 50px; background-color:#1f2227;">
+                    <center>
+                        <table cellspacing="0" cellpadding="0" width="100%" style="width: 100%;">
+                            <tbody><tr>
+                                <td style="font-size:24px">
+                                    <b>Total</b>
+                                </td>
+                                <td style="font-size:24px;text-align:right;">
+                                    <b>R$ {{.Total}}</b>
+                                </td>
+                            </tr>
+                            </tbody></table>
+                    </center>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <center>
+                        <table style="padding: 52px 0; margin: 0 auto;" cellpadding="0px" cellspacing="0px">
+                            <tbody><tr>
+                                <td>
+                                    <a style="padding: 25px" href="https://www.facebook.com/onni.live/">
+                                        <img alt="ícone do facebook" src="https://cdn.onni.live/www/img/mail/ic-facebook.png" srcset="https://cdn.onni.live/www/img/mail/ic-facebook@2x.png 2x,
+                                          https://cdn.onni.live/www/img/mail/ic-facebook@3x.png 3x" class="ic-facebook"></a>
+                                </td>
+                                <td>
+                                    <a style="padding: 25px" href="https://www.instagram.com/onni.live/"><img alt="ícone do instagram" src="https://cdn.onni.live/www/img/mail/ic-instagram.png" srcset="https://cdn.onni.live/www/img/mail/ic-instagram@2x.png 2x,
+                                                                                                           https://cdn.onni.live/www/img/mail/ic-instagram@3x.png 3x" class="ic-instagram"></a>
+                                </td>
+                                <td>
+                                    <a style="padding: 25px" href="https://open.spotify.com/user/onni.live">
+                                        <img alt="ícone do spotify" src="https://cdn.onni.live/www/img/mail/ic-spotify.png" srcset="https://cdn.onni.live/www/img/mail/ic-spotify@2x.png 2x,
+                                          https://cdn.onni.live/www/img/mail/ic-spotify@3x.png 3x" class="ic-spotify">
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody></table>
+                        <p style="color: #828284;opacity: 0.7;font-family: Helvetica;font-size: 12px;text-align: center;font-weight:  lighter;max-width: 456px;margin: 0 auto;padding: 0 20px 40px;">
+        			              Este é um e-mail automático, por favor não responda.
+        			          </p>
+                    </center>
+                </td>
+            </tr>
+            </tbody></table>
+    </center>
+
+
+</body>
+</html>

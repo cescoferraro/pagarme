@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <center style="-webkit-font-smoothing: antialiased;">
+      <!-- Texto que aparece antes da abertura do email -->
+      <p style="display: none;">ONNi | Voucher adicionado em sua carteira.</p>
+      <table style="font-family: Helvetica, Arial, sans-serif; max-width: 600px; width: 100%; background-color: #16171B; color: #FFF;" cellspacing="0px" cellpadding="0px">
+        <tr style="margin-bottom: 30px; display: block; padding: 52px 52px 0 52px;">
+          <td>
+            <img style="width: 44px; height: 32px;" src="https://cdn.onni.live/www/img/mail/logo-white.png" />
+          </td>
+        </tr>
+        <tr style="margin-bottom: 30px; display: block; padding: 0 52px;">
+          <td style="display: block;">
+            <font style="
+              height: auto;
+              width: 100%;
+              color: #FFFFFF;
+              font-size: 26px;
+              font-weight: 600;
+              line-height: 1.2;
+              padding-bottom: 30px;
+              display: block;
+            ">
+            Voucher adicionado em sua carteira.
+            </font>
+            <font style="
+              height: auto;
+              width: 100%;
+              color: #b0b0b2;
+              font-size: 14px;
+              display: block;
+              font-weight: lighter;
+              margin-bottom: 30px;
+            ">O Voucher da compra que você realizou externamente já foi adicionado em sua carteira.</font>
+          </td>
+        </tr>
+        <tr style="display: block; padding: 52px 52px 0 52px; background: #1F2227;">
+          <td>
+            <font style="
+              color: #EA144E;
+              display: block;
+              font-size: 18px;
+            ">{{.ProductName}}</font>
+          </td>
+        </tr>
+        <tr style="display: block; padding: 0 52px; background: #1F2227;">
+          <td>
+            <font style="
+              height: auto;
+              width: 100%;
+              color: #b0b0b2;
+              font-size: 14px;
+              padding-top: 40px;
+              display: block;
+              font-weight: lighter;
+              margin-bottom: 10px;
+            ">Evento</font>
+          </td>
+        </tr>
+        <tr style="display: block; padding: 0 52px; background: #1F2227;">
+          <td>
+            <table cellpadding="0px" cellspacing="0px" style="display: block; margin-bottom: 30px; background: #1F2227;">
+              <tr>
+                <td>
+                  <span style="border-radius: 30px; overflow: hidden; height: 48px; width: 48px; margin-right: 16px; float: left; background: #FFF;">
+                    <img style="width: 100%;" src="https://api.onni.live/club/image/${clubId}" />
+                  </span>
+                </td>
+                <td style="display: block;">
+                  <font style="
+                    height: auto;
+                    width: 100%;
+                    color: #FFF;
+                    font-size: 16px;
+                    display: block;
+                    margin: 5px 0;
+                  ">${partyName}</font>
+                  <font style="
+                    height: auto;
+                    width: 100%;
+                    color: #b0b0b2;
+                    font-size: 16px;
+                    display: block;
+                  ">${partyStartDate} às ${partyStartHour}</font>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <center>
+              <table style="padding: 52px 0; margin: 0 auto;" cellpadding="0px" cellspacing="0px">
+                <tr>
+                  <td>
+                    <a style="padding: 25px" href="https://www.facebook.com/onni.live/">
+                      <img alt="ícone do facebook" src="https://cdn.onni.live/www/img/mail/ic-facebook.png"
+                      srcset="https://cdn.onni.live/www/img/mail/ic-facebook@2x.png 2x,
+                              https://cdn.onni.live/www/img/mail/ic-facebook@3x.png 3x"
+                      class="ic-facebook"></a>
+                  </td>
+                  <td>
+                    <a style="padding: 25px" href="https://www.instagram.com/onni.live/"><img alt="ícone do instagram" src="https://cdn.onni.live/www/img/mail/ic-instagram.png"
+                      srcset="https://cdn.onni.live/www/img/mail/ic-instagram@2x.png 2x,
+                              https://cdn.onni.live/www/img/mail/ic-instagram@3x.png 3x"
+                      class="ic-instagram"></a>
+                  </td>
+                  <td>
+                    <a style="padding: 25px" href="https://open.spotify.com/user/onni.live">
+                      <img alt="ícone do spotify" src="https://cdn.onni.live/www/img/mail/ic-spotify.png"
+                      srcset="https://cdn.onni.live/www/img/mail/ic-spotify@2x.png 2x,
+                              https://cdn.onni.live/www/img/mail/ic-spotify@3x.png 3x"
+                      class="ic-spotify">
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <p style="color: #828284;opacity: 0.7;font-family: Helvetica;font-size: 12px;text-align: center;font-weight:  lighter;max-width: 456px;margin: 0 auto;padding: 0 20px 40px;">
+        			Este é um e-mail automático, por favor não responda.
+        			</p>
+            </center>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+</html>

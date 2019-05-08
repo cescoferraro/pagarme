@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	  <head>
+		    <meta charset="utf-8">
+		    <title>ONNi</title>
+		    <meta name="viewport" content="width=device-width">
+	  </head>
+    <body>
+		    <div style="background: #16171b;margin: 0 auto;max-width: 600px;padding: 72px 0px 40px;border: 0;display: block;">
+			      <!--texto exibido junto com o assunto antes de abrir a mensagem-->
+						<div style="display: none">Você foi ganhou uma promoção para o evento {{.PartyName}}</div>
+			      <!--header-->
+			      <div style="margin: 0px auto 66px; display: block; max-width: 456px; padding: 0 20px;">
+				        <a href="https://onni.live"><img alt="https://onni.live" title="https//onni.live" src="https://cdn.onni.live/www/img/mail/logo-white.png" style=" display: block; width: 44px;" width="44">
+				        </a>
+			      </div>
+			      <h1 style="margin: 0 0 20px;display: block;color: #FFF;font-size: 28px;line-height: 1.2;margin: 0;font-family:  Helvetica;font-weight: 600;max-width: 456px;margin:  0 auto;padding: 0 20px 30px;">
+			          Você foi cadastrado em uma promoção para o evento {{.PartyName}}
+				        <span style="background: rgba(142,147,170,.2);max-width: 416px;padding: 0 20px;margin: 30px auto 0;height:  1px;display: block;"></span>
+			      </h1>
+
+						<p style="padding: 0; display: block; color: #EA144E;font-family: Helvetica;max-width: 456px;padding: 0 20px;font-size: 16px;line-height: 1.4;margin: 0 auto;font-weight:  100;">
+			          {{.ProductName}}
+			      </p>
+
+						<p style="padding: 0; display: block; color: #EA144E;font-family: Helvetica;max-width: 456px;padding: 0 20px;font-size: 16px;line-height: 1.4;margin: 0 auto;font-weight:  100;">
+			          <font style="text-decoration: line-through; color: #B9B9BB; margin-top: 10px; display: inline-block; font-size: 12px;">R$ {{.ValorOriginal}}</font><br />
+			          <font style="color: #B9B9BB; display: inline-block; font-size: 16px;">R$ {{.ValorComDesconto}}</font>
+			      </p>
+
+			      <p style="padding: 0; display: block; color: #B9B9BB;font-family: Helvetica;max-width: 456px;padding: 0 20px;font-size: 15px;line-height: 1.4;margin: 30px auto 10px;font-weight:  100;">
+				        Evento:
+			      </p>
+			      <div style="display: flex; max-width: 456px; padding: 0 20px; margin: 0 auto;">
+				        <div style="display: block; border: 1px solid #FFF; border-radius: 50%; flex:0 0 40px; height: 40px; margin-right: 15px; overflow: hidden; vertical-align: top;">
+					          <img src="" style="width: 40px; height: 40px; background: #FFF;" />
+				        </div>
+				        <div style="display: block; vertical-align: top;">
+					          <h1 style="margin: 0;color: #FFF;font-family: 'Helvetica', sans-serif;display: block;font-size: 18px;font-weight: normal;">{{.PartyName}}</h1>
+					          <span style="margin: 5px 0 0 0;color: #B9B9BB;font-size: 15px;font-family: Helvetica, sans-serif;display: block;">{{.PartyStartDate}}</span>
+				        </div>
+			      </div>
+		    </div>
+		    <!--Footer-->
+		    <div style="background: #16171b;margin: 0 auto;max-width: 600px;display: block;padding: 32px 0px;border: 0;">
+			      <table style="margin: 0 auto 20px;">
+				        <tbody><tr><td>
+					          <a style="diplay:block; padding: 0 10px;" href="http://facebook.com/onni.live">
+						            <img src="https://s3-sa-east-1.amazonaws.com/onni-medium-images/facebook.png" style=" width: 20px;">
+					          </a>
+				        </td>
+				        <td>
+					          <a style="diplay:block; padding: 0 10px;" href="https://www.instagram.com/onni.live">
+						            <img src="https://s3-sa-east-1.amazonaws.com/onni-medium-images/instagram.png" style=" width: 20px;">
+					          </a>
+				        </td>
+				        <td>
+					          <a style="diplay:block; padding: 0 10px;" href="https://open.spotify.com/user/onni.live">
+						            <img src="https://s3-sa-east-1.amazonaws.com/onni-medium-images/spotify.png" style=" width: 20px;">
+					          </a>
+				        </td>
+			          </tr></tbody></table>
+			      <p style="color: #828284;opacity: 0.7;font-family: Helvetica;font-size: 12px;text-align: center;font-weight:  lighter;max-width: 456px;margin: 0 auto;padding: 0 20px;">
+			          Este é um e-mail automático, por favor não responda.
+			      </p>
+		    </div>
+    </body>
+</html>

@@ -1,0 +1,194 @@
+meta:
+  project: inline-dockerfile
+
+mount=source:
+  bind: .
+  path: /go/src/github.com/onnidev/api
+mount=machine:
+  bind: ./api.zip
+  path: /api.zip
+
+mount=dist:
+  bind: ./bin/
+  path: /go/bin/
+
+env=vars:
+   variables: [VERSION=0.0.8]
+
+image=builder:
+  image: onnidev/api-builder
+  context: .
+  steps: |
+    FROM golang:1.10-alpine
+    RUN apk add -U git bash curl tree
+    ENV GOBIN=/go/bin
+    ENV PATH=/go/bin:$PATH
+    RUN go get -u github.com/golang/dep/cmd/dep
+    RUN go install github.com/golang/dep/cmd/dep
+    RUN go get -u github.com/go-swagger/go-swagger/cmd/swagger
+    RUN go install github.com/go-swagger/go-swagger/cmd/swagger
+    RUN go get -u github.com/jteeuwen/go-bindata/...
+    RUN go install github.com/jteeuwen/go-bindata
+    RUN go get -u github.com/ajvb/kala
+    RUN go install github.com/ajvb/kala
+    RUN go get -u golang.org/x/crypto/...
+    WORKDIR /go/src/github.com/onnidev/api
+    ENV CGO_ENABLED=0
+
+
+job=dep:
+  use: builder
+  artifact: ["vendor/"]
+  mounts: [source]
+  command: |
+    bash -c 'if [ ! -d vendor ]; then dep ensure; fi'
+
+job=generate:
+  use: builder
+  artifact: ["swagger.json","shared/files.go"]
+  mounts: [source]
+  command: |
+    bash -c 'go generate *.go'
+
+job=binary:
+  use: builder
+  artifact: ./bin/main
+  mounts: [source,dist]
+  depends: [vars]
+  command: |
+    bash -c 'go build -o /go/bin/main \
+    -ldflags "-X github.com/onnidev/api/config.VERSION=$VERSION" \
+    *.go'
+  env:
+    - "VERSION={env.VERSION:}"
+
+
+job=test:
+  use: builder
+  mounts: [source]
+  net-mode: host
+  env:
+    - "CIRCLECI={env.CIRCLECI:}"
+    - "CI={env.CI:}"
+  command: |
+    bash -c 'go test ./...'
+
+image=production:
+  image: onnidev/api
+  tags: ["latest"]
+  context: ./bin
+  depends: [vars,dep,test,generate,binary]
+  steps: |
+    FROM alpine:3.4
+    RUN apk --update upgrade
+    RUN apk add apache2-utils ca-certificates
+    RUN update-ca-certificates
+    RUN rm -rf /var/cache/apk/*
+    ADD ./main /main
+    EXPOSE 7000
+    CMD ["/main"]
+
+image=scheduler:
+  image: onnidev/scheduler
+  tags: ["latest"]
+  context: ./
+  depends: [vars]
+  steps: |
+    FROM alpine:3.4
+    RUN apk --update upgrade
+    RUN apk update
+    RUN apk add apache2-utils ca-certificates
+    RUN apk add wget
+    RUN wget https://github.com/cescoferraro/kala/releases/download/0.0.1/kala
+    RUN chmod +x ./kala
+    ADD ./main /api
+    EXPOSE 7000
+    CMD ["/kala","run","--jobDB=redis", "--jobDBAddress=redis.default.svc.cluster.local:6379", "--jobDBPassword=p84axRMOVk"]
+
+
+image=canary:
+  image: onnidev/canary
+  tags: ["latest"]
+  context: ./bin
+  depends: [vars,dep,test,generate,binary]
+  steps: |
+    FROM alpine:3.4
+    RUN apk --update upgrade
+    RUN apk add apache2-utils ca-certificates
+    RUN update-ca-certificates
+    RUN rm -rf /var/cache/apk/*
+    ADD ./main /main
+    EXPOSE 7000
+    CMD ["/main"]
+
+image=loop:
+  image: onnidev/loop
+  tags: ["latest"]
+  context: .
+  steps: |
+    FROM onnidev/canary
+    EXPOSE 9000
+    CMD [ "/main", "looper" ]
+
+image=oplog:
+  image: onnidev/oplog
+  tags: ["latest"]
+  context: .
+  steps: |
+    FROM onnidev/canary
+    EXPOSE 8000
+    CMD [ "/main", "oploger" ]
+
+image=deployer:
+  image: onnidev/api-deployer
+  context: .
+  steps: |
+    FROM node
+    RUN npm i -g machine-share
+
+
+job=preview:
+  use: production
+  net-mode: host
+
+image=swagger:
+  image: onnidev/docs
+  tags: ["latest"]
+  context: .
+  steps: |
+    FROM swaggerapi/swagger-ui
+    ADD ./swagger.json /app/swagger.json
+
+# creates a MongoDB container running a fresh backup of ONNi Production MongoDB
+mount=dump:
+    bind: ./mongonni/
+    path: /app/
+image=mongod:
+  image: cescoferraro/mgo
+  context: .
+  steps: |
+    FROM mongo:3.2
+    RUN mkdir -p /app
+    RUN chmod 777 /app
+    WORKDIR /app
+job=backup:
+    use: mongod
+    mounts: [dump]
+    working-dir: /app
+    command: bash -c "rm -rf dump && mongodump --host mongo0.onni.live -u admin -p descriptor8 --db onni --authenticationDatabase admin"
+job=kube:
+    use: mongod
+    mounts: [dump]
+    working-dir: /app
+    command: bash -c "mongorestore --host mongo0.onni.live -u admin -p descriptor8"
+image=mongonni:
+    image: onnidev/mongonni
+    tags: ["latest"]
+    depends: [vars,backup]
+    context: ./mongonni
+    steps: |
+      FROM mongo:3.2
+      COPY dump /home/dump
+      COPY mongo.sh /home/mongo.sh
+      RUN chmod 777 /home/mongo.sh
+      CMD /home/mongo.sh

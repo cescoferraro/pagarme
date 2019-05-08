@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <center style="-webkit-font-smoothing: antialiased;">
+      <!-- Texto que aparece antes da abertura do email -->
+      <p style="display: none;">ONNi | Você foi cadastrado pelo club {{.ClubName}} para usar a plataforma ONNi. Siga os passos abaixo para começar a usar.</p>
+      <table style="font-family: Helvetica, Arial, sans-serif; max-width: 600px; width: 100%; background-color: #16171B; color: #FFF;" cellspacing="0px" cellpadding="0px">
+        <tr style="margin-bottom: 30px; display: block; padding: 52px 52px 0 52px;">
+          <td>
+            <img style="width: 44px; height: 32px;" src="https://cdn.onni.live/www/img/mail/logo-white.png" />
+          </td>
+        </tr>
+        <tr style="margin-bottom: 30px; display: block; padding: 0 52px;">
+          <td style="display: block;">
+            <font style="
+              height: auto;
+              width: 100%;
+              color: #FFFFFF;
+              font-size: 26px;
+              font-weight: 600;
+              line-height: 1.2;
+              padding-bottom: 40px;
+              display: block;
+            ">Olá {{.UserClubName}}</font>
+            <p style="
+              color: #B9B9BB;
+              font-family: Helvetica;
+              font-size: 16px;
+              line-height: 1.4;
+              margin: 0 auto 20px;
+              font-weight:  100;
+            ">Você foi cadastrado pelo club {{.ClubName}} para usar a plataforma ONNi. Siga os passos abaixo para começar a usar.</p>
+          </td>
+        </tr>
+        <tr style="background: #1f2327; margin-bottom: 30px; display: block; padding: 0 52px;">
+          <td>
+
+            <div style="margin: 0 auto;max-width: 600px;padding: 40px 0px 0px; border: 0;display: block;">
+              <h2 style="color: #fff; font-weight: normal; font-family: Helvetica;font-size: 18px;line-height: 24px;margin: 0 auto;font-weight: 500; max-width: 600px; margin-bottom: 8px">
+      					1) Acesse o sistema
+      				</h2>
+              <a style="color: #FFF; text-decoration: none; font-size: 14px; font-weight: lighter;" href="https://app.onni.live/">https://app.onni.live/</a>
+        		</div>
+
+            <div style="margin: 0 auto;max-width: 600px;padding: 20px 0px 0px; border: 0;display: block;">
+              <h2 style="color: #fff; font-weight: normal; font-family: Helvetica;font-size: 18px;line-height: 24px;margin: 0 auto;font-weight: 500; max-width: 600px; margin-bottom: 8px">
+      					2) Acesse sua conta
+      				</h2>
+              <span style="display: block; margin-bottom: 10px; color: #FFF; text-decoration: none; font-size: 14px; font-weight: lighter;">O login deve ser feito usando seu usuário e senha:</span>
+              <span style="color: #FFF; text-decoration: none; font-size: 14px; font-weight: lighter;">Usuário: {{.Mail}}<br />Senha: {{.Password}}</span>
+            </div>
+
+            <div style="margin: 0 auto;max-width: 600px;padding: 20px 0px 40px; border: 0;display: block;">
+              <h2 style="color: #fff; font-weight: normal; font-family: Helvetica;font-size: 18px;line-height: 24px;margin: 0 auto;font-weight: 500; max-width: 600px; margin-bottom: 8px">
+      					3) Comece a usar
+      				</h2>
+              <span style="display: block; margin-bottom: 10px; color: #FFF; text-decoration: none; font-size: 14px; font-weight: lighter;">Usando a ONNi, você cria e gerencia eventos e sua equipe.</span>
+            </div>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <center>
+              <table style="padding: 52px 0; margin: 0 auto;" cellpadding="0px" cellspacing="0px">
+                <tr>
+                  <td>
+                    <a style="padding: 25px" href="https://www.facebook.com/onni.live/">
+                      <img alt="ícone do facebook" src="https://cdn.onni.live/www/img/mail/ic-facebook.png"
+                      srcset="https://cdn.onni.live/www/img/mail/ic-facebook@2x.png 2x,
+                              https://cdn.onni.live/www/img/mail/ic-facebook@3x.png 3x"
+                      class="ic-facebook"></a>
+                  </td>
+                  <td>
+                    <a style="padding: 25px" href="https://www.instagram.com/onni.live/"><img alt="ícone do instagram" src="https://cdn.onni.live/www/img/mail/ic-instagram.png"
+                      srcset="https://cdn.onni.live/www/img/mail/ic-instagram@2x.png 2x,
+                              https://cdn.onni.live/www/img/mail/ic-instagram@3x.png 3x"
+                      class="ic-instagram"></a>
+                  </td>
+                  <td>
+                    <a style="padding: 25px" href="https://open.spotify.com/user/onni.live">
+                      <img alt="ícone do spotify" src="https://cdn.onni.live/www/img/mail/ic-spotify.png"
+                      srcset="https://cdn.onni.live/www/img/mail/ic-spotify@2x.png 2x,
+                              https://cdn.onni.live/www/img/mail/ic-spotify@3x.png 3x"
+                      class="ic-spotify">
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <p style="color: #828284;opacity: 0.7;font-family: Helvetica;font-size: 12px;text-align: center;font-weight:  lighter;max-width: 456px;margin: 0 auto;padding: 0 20px 40px;">
+        			Este é um e-mail automático, por favor não responda.
+        			</p>
+            </center>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+</html>

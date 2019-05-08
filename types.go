@@ -1,4 +1,4 @@
-package pagarme
+package getnet
 
 // Founds ssfjkdn
 type Founds struct {

@@ -1,0 +1,1321 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "the purpose of this application is to provide an application\nthat is using plain go code to define an API\n\nThis should demonstrate all routes on https://api.onni.live",
+    "title": "ONNi API.",
+    "termsOfService": "there are no TOS at this moment, use at your own risk we take no responsibility",
+    "contact": {
+      "name": "Francesco Ferraro",
+      "url": "https://www.cescoferraro.xyz",
+      "email": "francescoaferraro@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    },
+    "version": "0.0.1"
+  },
+  "host": "api.onni.live",
+  "paths": {
+    "/cards": {
+      "get": {
+        "security": [
+          {
+            "X-AUTH-APPLICATION-TOKEN": [
+              "\"sdfdfs\""
+            ]
+          },
+          {
+            "X-AUTH-ID": [
+              "\"asdasdsad\""
+            ]
+          },
+          {
+            "X-CLIENT-ID": [
+              "\"asd2e2e3\""
+            ]
+          }
+        ],
+        "description": "This will show all available cards by default.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http"
+        ],
+        "tags": [
+          "app"
+        ],
+        "summary": "Lists cards of a given ser customer.",
+        "operationId": "listCards",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/cardsList"
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "X-AUTH-APPLICATION-TOKEN": []
+          },
+          {
+            "X-AUTH-ID": []
+          },
+          {
+            "X-CLIENT-ID": []
+          }
+        ],
+        "description": "This will enables you to create a card.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http"
+        ],
+        "tags": [
+          "app"
+        ],
+        "summary": "Create a card for a customer.",
+        "operationId": "postCard",
+        "parameters": [
+          {
+            "x-go-name": "Body",
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CardRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/dbCard"
+          },
+          "404": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/cards/{id}": {
+      "get": {
+        "security": [
+          {
+            "X-AUTH-APPLICATION-TOKEN": []
+          },
+          {
+            "X-AUTH-ID": []
+          },
+          {
+            "X-CLIENT-ID": []
+          }
+        ],
+        "description": "This will enables to get all card information\nfrom such id.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http"
+        ],
+        "tags": [
+          "app"
+        ],
+        "summary": "Reads a card document on MongoDB of a given id.",
+        "operationId": "getCard",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "ID",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/dbCard"
+          },
+          "404": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "X-AUTH-APPLICATION-TOKEN": []
+          },
+          {
+            "X-AUTH-ID": []
+          },
+          {
+            "X-CLIENT-ID": []
+          }
+        ],
+        "description": "This will enables to delete a card with such id.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http"
+        ],
+        "tags": [
+          "app"
+        ],
+        "summary": "Deletes a card document on MongoDB of a given id.",
+        "operationId": "deleteCard",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "ID",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/cardsList"
+          },
+          "404": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "X-AUTH-APPLICATION-TOKEN": []
+          },
+          {
+            "X-AUTH-ID": []
+          },
+          {
+            "X-CLIENT-ID": []
+          }
+        ],
+        "description": "This will enables to update a card with such id.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http"
+        ],
+        "tags": [
+          "app"
+        ],
+        "summary": "Patches a card document on MongoDB of a given id.",
+        "operationId": "patchCard",
+        "parameters": [
+          {
+            "x-go-name": "Body",
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CardPatch"
+            }
+          },
+          {
+            "type": "string",
+            "x-go-name": "ID",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/dbCard"
+          },
+          "404": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/clubs/dashboard/{clubId}": {
+      "get": {
+        "security": [
+          {
+            "JWT_TOKEN": []
+          }
+        ],
+        "description": "By latest we meand parties with startDate grater than\n30 days before today.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "backoffice"
+        ],
+        "summary": "Get all the latest parties.",
+        "operationId": "getDashboardByClubID",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/partiesList"
+          },
+          "404": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/parties": {
+      "get": {
+        "security": [
+          {
+            "JWT_TOKEN": []
+          }
+        ],
+        "description": "By latest we meand parties with startDate grater than\n30 days before today.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "backoffice"
+        ],
+        "summary": "Get all the latest parties.",
+        "operationId": "getPartiesbyID",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/partiesList"
+          },
+          "404": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/recipients/{clubId}": {
+      "get": {
+        "security": [
+          {
+            "X-AUTH-APPLICATION-TOKEN": []
+          },
+          {
+            "X-AUTH-ID": []
+          },
+          {
+            "X-CLIENT-ID": []
+          }
+        ],
+        "description": "This will enables to get all card information\nfrom such id.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http"
+        ],
+        "tags": [
+          "backoffice"
+        ],
+        "summary": "Reads a card document on MongoDB of a given id.",
+        "operationId": "getRecipients",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "ClubID",
+            "name": "clubId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/dbCard"
+          },
+          "404": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/report/download/{partyId}": {
+      "get": {
+        "security": [
+          {
+            "JWT_TOKEN": []
+          }
+        ],
+        "description": "This will enables club promoters to have a better understanding of\ntheir gross sales",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "backoffice"
+        ],
+        "summary": "Downloads an excel Sheet with all vouchers consumed at the party\nwith the given id",
+        "operationId": "generateExcel",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "PartyID",
+            "name": "partyId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/Binary"
+          }
+        }
+      }
+    },
+    "/report/mail/{partyId}": {
+      "post": {
+        "security": [
+          {
+            "JWT_TOKEN": []
+          }
+        ],
+        "description": "This will enables club promoters to have a better understanding of\ntheir gross sales",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "backoffice"
+        ],
+        "summary": "Sends a party report for the club email",
+        "operationId": "sendMail",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "PartyID",
+            "name": "partyId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ok"
+          }
+        }
+      }
+    },
+    "/report/party/{partyId}": {
+      "post": {
+        "security": [
+          {
+            "JWT_TOKEN": []
+          }
+        ],
+        "description": "This will enables club promoters to have a better understanding of\ntheir gross sales at right when the party closes.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "backoffice"
+        ],
+        "summary": "Sends a party report for all club admins",
+        "operationId": "reportCloseParty",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ok"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "security": [
+          {
+            "JWT_TOKEN": []
+          }
+        ],
+        "description": "Login a user",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "backoffice"
+        ],
+        "operationId": "loginResponse",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/loginResponse"
+          }
+        }
+      }
+    },
+    "/userClub": {
+      "get": {
+        "security": [
+          {
+            "JWT_TOKEN": []
+          }
+        ],
+        "description": "Get all backoffice users",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "backoffice"
+        ],
+        "summary": "Get all the latest parties.",
+        "operationId": "gerUserClub",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/partiesList"
+          }
+        }
+      }
+    },
+    "/vouchers/transfer/{voucherId}": {
+      "post": {
+        "security": [
+          {
+            "JWT_TOKEN": []
+          }
+        ],
+        "description": "Vouchers que podem ser transferidos: type = Compra ou Promocional e status = Disponível\nQuando um voucher é transferido o voucher original assume o STATUS transferido e um novo voucher com TYPE transferido é criado.\nO novo voucher é praticamente um clone do voucher original, com exceção de alguns campos:\nCampos alterados:\n\"creationDate\"\n\"updateDate\"\n\"customerId\"\n\"customerName\"\n\"status\": avaliable\n\"type\": transfered\nNovo campo:\n\"transferedFrom\": id do voucher original\nLeitura de voucher transferido: vouchers com STATUS transferido não podem ser validados.\nEstorno de voucher transferido: o estorno fica habilitado para o novo voucher, mas o serviço chama o id do voucher original para realizar o estorno utilizando o id informado no campo \"transferedFrom\".",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "backoffice"
+        ],
+        "summary": "Transferencia de voucher entre usuários:",
+        "operationId": "transferVoucher",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "VoucherID",
+            "name": "voucherId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/voucherType"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Address": {
+      "description": "Address TODO: NEEDS COMMENT INFO",
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string",
+          "x-go-name": "City"
+        },
+        "country": {
+          "type": "string",
+          "x-go-name": "Country"
+        },
+        "number": {
+          "type": "string",
+          "x-go-name": "Number"
+        },
+        "state": {
+          "type": "string",
+          "x-go-name": "State"
+        },
+        "street": {
+          "type": "string",
+          "x-go-name": "Street"
+        },
+        "unit": {
+          "type": "string",
+          "x-go-name": "Unit"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "BankingInfo": {
+      "description": "BankingInfo sdjknf",
+      "type": "object",
+      "properties": {
+        "bankAccount": {
+          "type": "string",
+          "x-go-name": "BankAccount"
+        },
+        "bankAccountName": {
+          "type": "string",
+          "x-go-name": "BankAccountName"
+        },
+        "bankAccountVC": {
+          "type": "string",
+          "x-go-name": "BankAccountVC"
+        },
+        "bankBranch": {
+          "type": "string",
+          "x-go-name": "BankBranch"
+        },
+        "bankBranchVC": {
+          "type": "string",
+          "x-go-name": "BankBranchVC"
+        },
+        "bankCode": {
+          "type": "string",
+          "x-go-name": "BankCode"
+        },
+        "documentNumber": {
+          "type": "string",
+          "x-go-name": "DocumentNumber"
+        },
+        "personType": {
+          "type": "string",
+          "x-go-name": "PersonType"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "Card": {
+      "description": "Card type for the above middleware",
+      "type": "object",
+      "required": [
+        "id",
+        "customerId",
+        "cardToken",
+        "last4",
+        "brand",
+        "defaultCard",
+        "gatewayType"
+      ],
+      "properties": {
+        "brand": {
+          "type": "string",
+          "x-go-name": "Brand"
+        },
+        "cardToken": {
+          "type": "string",
+          "x-go-name": "CardToken"
+        },
+        "creationDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "customerId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "defaultCard": {
+          "type": "boolean",
+          "x-go-name": "Default"
+        },
+        "deprecated": {
+          "type": "string",
+          "x-go-name": "Deprecated"
+        },
+        "gatewayType": {
+          "type": "string",
+          "x-go-name": "GatewayType"
+        },
+        "id": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "last4": {
+          "type": "string",
+          "x-go-name": "Last4"
+        },
+        "updateDate": {
+          "$ref": "#/definitions/Timestamp"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "CardPatch": {
+      "description": "CardPatch sdfkjd",
+      "type": "object",
+      "properties": {
+        "defaultCard": {
+          "type": "boolean",
+          "x-go-name": "Default"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "CardRequest": {
+      "description": "CardRequest type for the above middleware",
+      "type": "object",
+      "required": [
+        "card_number",
+        "holdername",
+        "card_expiration_date",
+        "card_cvv"
+      ],
+      "properties": {
+        "card_cvv": {
+          "description": "The number should be 3 numbers long",
+          "type": "string",
+          "x-go-name": "Cvv"
+        },
+        "card_expiration_date": {
+          "description": "The number should be 4 numbers long",
+          "type": "string",
+          "x-go-name": "ExpirationDate"
+        },
+        "card_number": {
+          "description": "The number should be 16 numbers long",
+          "type": "string",
+          "maxLength": 12,
+          "minLength": 12,
+          "x-go-name": "Number"
+        },
+        "holdername": {
+          "description": "The holdername of the credit card",
+          "type": "string",
+          "x-go-name": "HolderName"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "Club": {
+      "description": "Club is a mongo document",
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/Address"
+        },
+        "averageExpendituresProduct": {
+          "description": "DocumentNumber             string  `json:\"documentNumber\" bson:\"documentNumber\"`",
+          "type": "number",
+          "format": "double",
+          "x-go-name": "AverageExpendituresProduct"
+        },
+        "averageExpendituresTicket": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "AverageExpendituresTicket"
+        },
+        "backgroundImage": {
+          "$ref": "#/definitions/Image"
+        },
+        "bankLegalAddress": {
+          "type": "string",
+          "x-go-name": "BankLegalAddress"
+        },
+        "creationDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "description": {
+          "type": "string",
+          "x-go-name": "Description"
+        },
+        "featured": {
+          "type": "boolean",
+          "x-go-name": "Featured"
+        },
+        "flatProducts": {
+          "type": "boolean",
+          "x-go-name": "FlatProducts"
+        },
+        "id": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "image": {
+          "$ref": "#/definitions/Image"
+        },
+        "liability": {
+          "type": "string",
+          "x-go-name": "Liability"
+        },
+        "location": {
+          "$ref": "#/definitions/Location"
+        },
+        "mail": {
+          "type": "string",
+          "x-go-name": "Mail"
+        },
+        "musicStyles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Style"
+          },
+          "x-go-name": "MusicStyles"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "nameSearchable": {
+          "type": "string",
+          "x-go-name": "NameSearchable"
+        },
+        "operationType": {
+          "type": "string",
+          "x-go-name": "OperationType"
+        },
+        "pagarMeRecipientId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "percentDrink": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "PercentDrink"
+        },
+        "percentPrePaid": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "PercentPrePaid"
+        },
+        "percentTicket": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "PercentTicket"
+        },
+        "productionType": {
+          "description": "TronEndPoint   string  `bson:\"tronEndPoint\" json:\"tronEndPoint\"`\nTronLicense    string  `bson:\"tronLicense\" json:\"tronLicense\"`",
+          "type": "string",
+          "x-go-name": "ProductionType"
+        },
+        "recipients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recipient"
+          },
+          "x-go-name": "Recipients"
+        },
+        "registerOrigin": {
+          "type": "string",
+          "x-go-name": "RegisterOrigin"
+        },
+        "status": {
+          "type": "string",
+          "x-go-name": "Status"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "Tags"
+        },
+        "updateDate": {
+          "$ref": "#/definitions/Timestamp"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "File": {
+      "type": "object",
+      "title": "File represents an open file descriptor.",
+      "x-go-package": "os"
+    },
+    "Image": {
+      "description": "Image is a struct",
+      "type": "object",
+      "properties": {
+        "creationDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "fileId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "mimeType": {
+          "type": "string",
+          "x-go-name": "MimeType"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "Location": {
+      "description": "Location is the shit",
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "x-go-name": "Coordinates"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "ObjectId": {
+      "description": "http://www.mongodb.org/display/DOCS/Object+IDs",
+      "type": "string",
+      "title": "ObjectId is a unique ID identifying a BSON value. It must be exactly 12 bytes\nlong. MongoDB objects by default have such a property set in their \"_id\"\nproperty.",
+      "x-go-package": "github.com/onnidev/api/vendor/gopkg.in/mgo.v2/bson"
+    },
+    "Party": {
+      "description": "Party type for the above middleware",
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/Address"
+        },
+        "assumeServiceFee": {
+          "type": "boolean",
+          "x-go-name": "AssumeServiceFee"
+        },
+        "avarageExpeditureProducts": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "AvarageExpeditureProducts"
+        },
+        "avarageExpeditureTickets": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "AvarageExpeditureTickets"
+        },
+        "backgroundImage": {
+          "$ref": "#/definitions/Image"
+        },
+        "changeAddress": {
+          "type": "boolean",
+          "x-go-name": "ChangeAddress"
+        },
+        "club": {
+          "$ref": "#/definitions/Club"
+        },
+        "clubId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "clubMenuProductId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "clubMenuTicketId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "creationDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "description": {
+          "type": "string",
+          "x-go-name": "Description"
+        },
+        "endDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "id": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "location": {
+          "$ref": "#/definitions/Location"
+        },
+        "mainAttraction": {
+          "type": "string",
+          "x-go-name": "MainAttraction"
+        },
+        "mainAttractionSeachable": {
+          "type": "string",
+          "x-go-name": "MainAttractionSearchable"
+        },
+        "musicStyles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Style"
+          },
+          "x-go-name": "MusicStyles"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "nameSearchable": {
+          "type": "string",
+          "x-go-name": "NameSearchable"
+        },
+        "otherAttractions": {
+          "type": "string",
+          "x-go-name": "OtherAttractions"
+        },
+        "otherAttractionsSearchable": {
+          "type": "string",
+          "x-go-name": "OtherAttractionsSearchable"
+        },
+        "preSaleEndDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "preSaleStartDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "startDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "status": {
+          "type": "string",
+          "x-go-name": "Status"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "Tags"
+        },
+        "updateDate": {
+          "$ref": "#/definitions/Timestamp"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "Price": {
+      "description": "Price sdfks",
+      "type": "object",
+      "properties": {
+        "currencyIsoCode": {
+          "type": "string",
+          "x-go-name": "CurrentIsoCode"
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Value"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "Recipient": {
+      "description": "Recipient is a mongo document",
+      "type": "object",
+      "properties": {
+        "bankAccountId": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "BankAccountID"
+        },
+        "bankingInfo": {
+          "$ref": "#/definitions/BankingInfo"
+        },
+        "clubId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "creationDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "id": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "recipientId": {
+          "type": "string",
+          "x-go-name": "RecipientID"
+        },
+        "status": {
+          "type": "string",
+          "x-go-name": "Status"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        },
+        "updateDate": {
+          "$ref": "#/definitions/Timestamp"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "Style": {
+      "description": "Style is a struct",
+      "type": "object",
+      "properties": {
+        "creationDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "id": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "image": {
+          "$ref": "#/definitions/Image"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "updateDate": {
+          "$ref": "#/definitions/Timestamp"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "Timestamp": {
+      "description": "Timestamp TODO: NEEDS COMMENT INFO",
+      "type": "string",
+      "format": "date-time",
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "UserClubLoginResponse": {
+      "description": "UserClubLoginResponse sdfkjn",
+      "type": "object",
+      "properties": {
+        "clubId": {
+          "type": "string",
+          "x-go-name": "ClubID"
+        },
+        "clubs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Club"
+          },
+          "x-go-name": "Clubs"
+        },
+        "id": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "mail": {
+          "type": "string",
+          "x-go-name": "Mail"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "profile": {
+          "type": "string",
+          "x-go-name": "Profile"
+        },
+        "token": {
+          "type": "string",
+          "x-go-name": "Token"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "Voucher": {
+      "description": "Voucher is a mongo document",
+      "type": "object",
+      "properties": {
+        "clubId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "clubName": {
+          "type": "string",
+          "x-go-name": "ClubName"
+        },
+        "creationDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "customerId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "customerName": {
+          "type": "string",
+          "x-go-name": "CustomerName"
+        },
+        "endDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "id": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "invoiceId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "partyId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "partyName": {
+          "type": "string",
+          "x-go-name": "PartyName"
+        },
+        "partyProductId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "price": {
+          "$ref": "#/definitions/Price"
+        },
+        "product": {
+          "$ref": "#/definitions/VoucherProduct"
+        },
+        "promotionId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "responsibleUserClubId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "startDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "status": {
+          "type": "string",
+          "x-go-name": "Status"
+        },
+        "transactionId": {
+          "type": "string",
+          "x-go-name": "TransactionID"
+        },
+        "transferedFrom": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        },
+        "updateDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "voucherUseDate": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "voucherUseUserClubId": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "voucherUseUserClubName": {
+          "type": "string",
+          "x-go-name": "VoucherUseUserClubName"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    },
+    "VoucherProduct": {
+      "description": "VoucherProduct fknjsd",
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/Image"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        }
+      },
+      "x-go-package": "github.com/onnidev/api/types"
+    }
+  },
+  "responses": {
+    "Binary": {
+      "description": "DownloadedExcelSheet ksjadn",
+      "schema": {
+        "$ref": "#/definitions/File"
+      }
+    },
+    "cardsList": {
+      "description": "Cards is a list of cards of a giver user",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Card"
+        }
+      }
+    },
+    "dbCard": {
+      "description": "CardResponse is the card added to MongoDB",
+      "schema": {
+        "$ref": "#/definitions/Card"
+      }
+    },
+    "error": {
+      "description": "ErrorResponse is the card added to MongoDB"
+    },
+    "loginResponse": {
+      "description": "SwaggerLoginResponse dsfkjnsdf",
+      "schema": {
+        "$ref": "#/definitions/UserClubLoginResponse"
+      }
+    },
+    "ok": {
+      "description": "Ok ksjadn"
+    },
+    "partiesList": {
+      "description": "Parties is a list of cards of a giver user",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Party"
+        }
+      }
+    },
+    "voucherType": {
+      "description": "VoucherResponse is the representation of a Voucher document on MongoDB",
+      "schema": {
+        "$ref": "#/definitions/Voucher"
+      }
+    },
+    "vouchersType": {
+      "description": "VouchersResponse is a list of cards of a giver user",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Voucher"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "JWT_TOKEN": {
+      "type": "apiKey",
+      "name": "JWT_TOKEN",
+      "in": "header"
+    }
+  }
+}

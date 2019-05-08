@@ -1,0 +1,33 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: scheduler
+spec:
+  tls:
+    - hosts:
+      - scheduler.onni.live
+      secretName: tls-secret
+  rules:
+    - host: scheduler.onni.live
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: scheduler-svc
+            servicePort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scheduler-svc
+  labels:
+    app: scheduler-svc
+spec:
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+    name: http
+  selector:
+    app: scheduler

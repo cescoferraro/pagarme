@@ -1,0 +1,46 @@
+		// token := "EAAGaHSWUK38BAAlLeOp4FPgqauS6aZC3vG5MTDnmanX7rzXAHbHlJ08seacBCTfZBcg63nr2ObTIYKoN3yZBsH4SrgwqVHSJvfCVAUtd3WPnCtJBLHmBn1vQkbswMl7TW0hfpzg9e5GwRkvLKzrNZC8hZCUZCbJmm1TwisadvZASOyZClTIyRuZCeYi8DNqZBDyYYZD"
+		// t.Run("Facebook Login", func(t *testing.T) {
+		// 	fbLogin := types.FacebookLoginRequest{
+		// 		AccessToken: token,
+		// 	}
+		// 	req, err := json.Marshal(fbLogin)
+		// 	assert.NoError(t, err)
+		// 	ajax := infra.Ajax{
+		// 		Method:  "POST",
+		// 		Body:    bytes.NewBuffer(req),
+		// 		Path:    infra.TestServer.URL + "/customer/login/facebook",
+		// 		Headers: headers,
+		// 	}
+		// 	_, body := infra.NewTestRequest(t, ajax)
+		// 	log.Println(string(body))
+		// })
+		// t.Run("Facebook SignUp", func(t *testing.T) {
+
+		// 	birthDate := types.Timestamp(time.Now().Add(-24 * 365 * 25 * time.Hour))
+		// 	fbSignUp := types.FacebookSignUpRequest{
+		// 		AccessToken:    token,
+		// 		FirstName:      fake.FirstName(),
+		// 		LastName:       fake.LastName(),
+		// 		Mail:           fake.FirstName() + "@gmail.com",
+		// 		BirthDate:      &birthDate,
+		// 		Phone:          "3289074031",
+		// 		UserName:       "askjdn",
+		// 		DocumentNumber: "skdjfn",
+		// 	}
+		// 	req, err := json.Marshal(fbSignUp)
+		// 	log.Println(string(req))
+		// 	assert.NoError(t, err)
+		// 	ajax := infra.Ajax{
+		// 		Method:  "POST",
+		// 		Body:    bytes.NewBuffer(req),
+		// 		Path:    infra.TestServer.URL + "/customer/signup/facebook",
+		// 		Headers: headers,
+		// 	}
+		// 	_, body := infra.NewTestRequest(t, ajax)
+		// 	log.Println(string(body))
+		// })
+		// t.Run("check myself at facebook", func(t *testing.T) {
+		// 	result, err := interfaces.GetFacebookProfile(token)
+		// 	assert.NoError(t, err)
+		// 	log.Println(result)
+		// })

@@ -1,0 +1,66 @@
+{
+	"id": "5aa6ca99cc922d72aa3f6fa2",
+	"clubId": "592ca3b3cc922d18bdae4cd8",
+	"name": "Cardápio da eeeeee",
+	"products": [{
+		"menuProductId": "5b364d8ddddde60001165f3d",
+		"productId": "5a9556a8cc922d68ac5aed5a",
+		"exhibitionName": "Água",
+		"category": "VARIOUS",
+		"price": {
+			"value": 5.0,
+			"currencyIsoCode": "BRL"
+		},
+		"doNotSellMoreThan": 124,
+		"doNotSellBefore": null,
+		"doNotSellAfter": null,
+		"active": true,
+		"featured": true,
+		"generalInformation": null,
+		"image": {
+			"fileId": "5a9556a7946c050001ff0573",
+			"mimeType": "IMAGE_PNG",
+			"creationDate": 1519736488329
+		},
+		"combo": []
+	}, {
+		"menuProductId": "5b364d8ddddde60001165f3e",
+		"productId": null,
+		"exhibitionName": "1 Aperol Garrafa + 2 Budweiser 600ml",
+		"category": "COMBOS",
+		"price": {
+			"value": 500.0,
+			"currencyIsoCode": "BRL"
+		},
+		"doNotSellMoreThan": 100,
+		"doNotSellBefore": null,
+		"doNotSellAfter": null,
+		"active": true,
+		"featured": true,
+		"generalInformation": null,
+		"image": {
+			"fileId": "5a947a68946c050001ff0529",
+			"mimeType": "IMAGE_PNG",
+			"creationDate": 1519680105204
+		},
+		"combo": [{
+			"productId": "5a947a69cc922d68ac5aeb90",
+			"productName": "Aperol Garrafa",
+			"quantity": 1,
+			"image": {
+				"fileId": "5a947a68946c050001ff0529",
+				"mimeType": "IMAGE_PNG",
+				"creationDate": 1519680105204
+			}
+		}, {
+			"productId": "5a959c7ccc922d68ac5aedc0",
+			"productName": "Budweiser 600ml",
+			"quantity": 2,
+			"image": {
+				"fileId": "5a959c7b946c050001ff05c7",
+				"mimeType": "IMAGE_PNG",
+				"creationDate": 1519754364889
+			}
+		}]
+	}]
+}

@@ -1,0 +1,19 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dashboard
+  namespace: kube-system
+spec:
+  tls:
+    - hosts:
+      - dashboard.onni.live
+      secretName: tls-secret
+  rules:
+    - host: dashboard.onni.live
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: kubernetes-dashboard
+            servicePort: 443
